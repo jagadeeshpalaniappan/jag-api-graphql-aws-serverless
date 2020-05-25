@@ -1,24 +1,17 @@
-let arc = require('@architect/functions')
-let {ApolloServer, gql} = require('apollo-server-lambda')
+const arc = require("@architect/functions");
+const { ApolloServer, gql } = require("apollo-server-lambda");
+const { typeDefs, resolvers } = require("@architect/shared/graphql");
 
-let typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`
+const cors = {
+  origin: "*",
+  credentials: true,
+};
 
-let resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-}
+const server = new ApolloServer({ typeDefs, resolvers, cors });
+const handler = server.createHandler();
 
-let server = new ApolloServer({typeDefs, resolvers})
-let handler = server.createHandler()
-
-exports.handler = function(event, context, callback) {
-  let body = arc.http.helpers.bodyParser(event)
-  // Body is now parsed, re-encode to JSON for Apollo
-  event.body = JSON.stringify(body)
-  handler(event, context, callback)
-}
+exports.handler = function (event, context, callback) {
+  const body = arc.http.helpers.bodyParser(event);
+  event.body = JSON.stringify(body); // Body is now parsed, re-encode to JSON for Apollo
+  handler(event, context, callback);
+};
