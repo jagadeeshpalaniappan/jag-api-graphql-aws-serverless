@@ -13,7 +13,7 @@ const baseTypeDefs = gql`
 `;
 const typeDefs = [baseTypeDefs, userTypeDefs];
 
-const resolvers1 = {
+const resolvers = {
   Query: {
     hello: () => "Hello Jag!",
     ...userResolvers.Query,
@@ -23,7 +23,4 @@ const resolvers1 = {
   },
 };
 
-module.exports = {
-  typeDefs,
-  resolvers: resolvers1,
-};
+module.exports = { typeDefs, resolvers };

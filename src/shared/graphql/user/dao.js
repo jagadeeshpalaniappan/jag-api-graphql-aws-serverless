@@ -21,7 +21,7 @@ async function updateUser({ id, user }) {
   return convertKeyToId([dbUser])[0];
 }
 
-async function deleteUser({ id }) {
+function deleteUser({ id }) {
   return db.destroy({ table: "users", key: id });
 }
 
