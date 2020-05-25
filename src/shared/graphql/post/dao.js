@@ -25,4 +25,17 @@ function deletePost({ id }) {
   return db.destroy({ table: "posts", key: id });
 }
 
-module.exports = { getPosts, getPost, createPost, updatePost, deletePost };
+async function getPostsByUserId({ userId }) {
+  const allPosts = await db.get({ table: "posts" });
+  const posts = allPosts.filter((post) => post.userId === userId);
+  return convertKeyToId(posts);
+}
+
+module.exports = {
+  getPosts,
+  getPost,
+  createPost,
+  updatePost,
+  deletePost,
+  getPostsByUserId,
+};

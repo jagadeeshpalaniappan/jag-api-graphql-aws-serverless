@@ -25,4 +25,10 @@ function deleteUser({ id }) {
   return db.destroy({ table: "users", key: id });
 }
 
-module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };
+module.exports = {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  deleteUser,
+};

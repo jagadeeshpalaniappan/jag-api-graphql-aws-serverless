@@ -28,6 +28,8 @@ const resolvers = {
     ...userResolvers.Mutation,
     ...postResolvers.Mutation,
   },
+  User: userResolvers.User,
+  Post: postResolvers.Post,
 };
 
 module.exports = { typeDefs, resolvers };

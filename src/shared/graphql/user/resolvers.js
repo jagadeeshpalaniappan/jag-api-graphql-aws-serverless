@@ -1,6 +1,7 @@
 const data = require("@begin/data");
 const xss = require("xss");
 const dao = require("./dao");
+const postDao = require("../post/dao");
 const { validateFields } = require("../../utils/common");
 
 function users(root, args, session) {
@@ -38,12 +39,20 @@ async function deleteUser(root, args, session) {
   return !!deletedUser;
 }
 
+function posts(root, args, session) {
+  const user = root; // from: root we can parentInfo
+  return postDao.getPostsByUserId({ userId: user.id });
+}
+
 const resolvers = {
   Query: { users, user },
   Mutation: {
     createUser,
     updateUser,
     deleteUser,
+  },
+  User: {
+    posts,
   },
 };
 

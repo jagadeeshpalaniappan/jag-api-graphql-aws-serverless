@@ -1,6 +1,7 @@
 const data = require("@begin/data");
 const xss = require("xss");
 const dao = require("./dao");
+const userDao = require("../user/dao");
 const { validateFields } = require("../../utils/common");
 
 function posts(root, args, session) {
@@ -14,9 +15,9 @@ function post(root, args, session) {
 
 function createPost(root, args, session) {
   console.log("createPost:", args);
-  const { title, body } = args.input;
-  const post = { title: xss(title), body: xss(body) };
-  let required = ["title"];
+  const { title, body, userId } = args.input;
+  const post = { title: xss(title), body: xss(body), userId };
+  let required = ["title", "userId"];
   validateFields(post, required);
 
   return dao.createPost({ post });
@@ -38,12 +39,20 @@ async function deletePost(root, args, session) {
   return !!deletedPost;
 }
 
+function user(root, args, session) {
+  const post = root; // from: root we can parentInfo
+  return userDao.getUser({ id: post.userId });
+}
+
 const resolvers = {
   Query: { posts, post },
   Mutation: {
     createPost,
     updatePost,
     deletePost,
+  },
+  Post: {
+    user,
   },
 };
 

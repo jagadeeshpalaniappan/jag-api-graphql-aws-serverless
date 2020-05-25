@@ -5,16 +5,19 @@ const typeDefs = gql`
     id: ID
     title: String
     body: String
+    user: User
   }
 
   input CreatePostInput {
     title: String!
     body: String!
+    userId: String!
   }
 
   input UpdatePostInput {
     title: String
     body: String
+    userId: String!
   }
 
   extend type Query {
