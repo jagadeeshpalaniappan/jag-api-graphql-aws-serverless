@@ -8,7 +8,9 @@
 - [AWS SAM](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/what-is-sam.html) -standard
 
 ## Technologies
-- [GraphQL](https://graphql.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [DynamoDB](https://aws.amazon.com/dynamodb/)
+- GraphQL Server: [Apollo GraphQL Server](https://www.apollographql.com/server/)
+- Serverless Function: [AWS Lambda](https://aws.amazon.com/lambda/), 
+- Database: [DynamoDB](https://aws.amazon.com/dynamodb/)
 
 
 ## Local Setup
