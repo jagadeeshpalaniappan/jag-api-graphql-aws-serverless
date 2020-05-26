@@ -28,6 +28,10 @@ function updateUser(root, args, session) {
   const { id } = args;
   const { name, email } = args.input;
   const user = { name: xss(name), email: xss(email) };
+
+  const user = {};
+  if (name) user.name = xss(name);
+  if (email) user.email = xss(email);
   let required = ["name", "email"];
   validateFields(user, required);
   return dao.updateUser({ id, user });

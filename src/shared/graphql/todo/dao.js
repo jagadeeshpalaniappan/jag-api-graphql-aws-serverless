@@ -17,7 +17,9 @@ async function createTodo({ todo }) {
 }
 
 async function updateTodo({ id, todo }) {
-  const dbTodo = await db.set({ table: "todos", key: id, ...todo });
+  const curTodo = await db.get({ table: "todos", key: id });
+  const newTodo = { ...curTodo, ...todo };
+  const dbTodo = await db.set({ table: "todos", key: id, ...newTodo });
   return convertKeyToId([dbTodo])[0];
 }
 

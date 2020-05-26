@@ -17,7 +17,9 @@ async function createPost({ post }) {
 }
 
 async function updatePost({ id, post }) {
-  const dbPost = await db.set({ table: "posts", key: id, ...post });
+  const curPost = await db.get({ table: "posts", key: id });
+  const newPost = { ...curPost, ...post };
+  const dbPost = await db.set({ table: "posts", key: id, ...newPost });
   return convertKeyToId([dbPost])[0];
 }
 

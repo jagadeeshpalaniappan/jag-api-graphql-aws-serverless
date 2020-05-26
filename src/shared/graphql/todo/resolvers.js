@@ -26,7 +26,10 @@ function createTodo(root, args, session) {
 function updateTodo(root, args, session) {
   const { id } = args;
   const { title, completed, userId } = args.input;
-  const todo = { title: xss(title), completed, userId };
+  const todo = {};
+  if (title) todo.title = xss(title);
+  if (completed) todo.completed = !!completed;
+  if (userId) todo.userId = userId;
   let required = ["title"];
   validateFields(todo, required);
   return dao.updateTodo({ id, todo });

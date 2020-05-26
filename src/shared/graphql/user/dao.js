@@ -17,7 +17,9 @@ async function createUser({ user }) {
 }
 
 async function updateUser({ id, user }) {
-  const dbUser = await db.set({ table: "users", key: id, ...user });
+  const curUser = await db.get({ table: "users", key: id });
+  const newUser = { ...curUser, ...user };
+  const dbUser = await db.set({ table: "users", key: id, ...newUser });
   return convertKeyToId([dbUser])[0];
 }
 

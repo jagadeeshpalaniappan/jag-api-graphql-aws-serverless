@@ -26,7 +26,10 @@ function createPost(root, args, session) {
 function updatePost(root, args, session) {
   const { id } = args;
   const { title, body, userId } = args.input;
-  const post = { title: xss(title), body: xss(body), userId };
+  const post = {};
+  if (title) post.title = xss(title);
+  if (body) post.body = xss(body);
+  if (userId) post.userId = userId;
   let required = ["title"];
   validateFields(post, required);
   return dao.updatePost({ id, post });
