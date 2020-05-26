@@ -33,7 +33,7 @@ function user(root, args, session) {
 }
 
 function createUser(root, args, session) {
-  console.log("createUser:", args);
+  // console.log("createUser:", args);
   const { name, email } = args.input;
   const user = { name: xss(name), email: xss(email) };
   let required = ["name", "email"];

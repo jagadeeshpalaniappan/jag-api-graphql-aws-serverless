@@ -26,7 +26,7 @@ function todo(root, args, session) {
 }
 
 function createTodo(root, args, session) {
-  console.log("createTodo:", args);
+  // console.log("createTodo:", args);
   const { title, completed, userId } = args.input;
   const todo = { title: xss(title), completed, userId };
   let required = ["title", "userId"];

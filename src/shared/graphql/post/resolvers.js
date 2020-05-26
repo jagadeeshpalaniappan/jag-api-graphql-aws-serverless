@@ -26,7 +26,7 @@ function post(root, args, session) {
 }
 
 function createPost(root, args, session) {
-  console.log("createPost:", args);
+  // console.log("createPost:", args);
   const { title, body, userId } = args.input;
   const post = { title: xss(title), body: xss(body), userId };
   let required = ["title", "userId"];
