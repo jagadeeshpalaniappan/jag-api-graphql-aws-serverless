@@ -7,6 +7,8 @@ const typeDefs = gql`
     email: String
     posts: [Post]
     todos: [Todo]
+    # posts(options: PostsPageQueryOptions): PostsPage # TODO: facing problem in filtering and applying criteria
+    # todos(options: TodosPageQueryOptions): TodosPage
   }
 
   input CreateUserInput {
