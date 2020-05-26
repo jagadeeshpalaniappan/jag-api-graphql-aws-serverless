@@ -1,5 +1,9 @@
 let { gql } = require("apollo-server-lambda");
 
+// common:
+const commonTypeDefs = require("./common/typeDefs");
+const commonResolvers = require("./common/resolvers");
+
 // user:
 const userTypeDefs = require("./user/typeDefs");
 const userResolvers = require("./user/resolvers");
@@ -20,16 +24,24 @@ const baseTypeDefs = gql`
     _: Int
   }
 `;
-const typeDefs = [baseTypeDefs, userTypeDefs, postTypeDefs, todoTypeDefs];
+const typeDefs = [
+  baseTypeDefs,
+  commonTypeDefs,
+  userTypeDefs,
+  postTypeDefs,
+  todoTypeDefs,
+];
 
 const resolvers = {
   Query: {
     hello: () => "Hello Jag!",
+    ...commonResolvers.Query,
     ...userResolvers.Query,
     ...postResolvers.Query,
     ...todoResolvers.Query,
   },
   Mutation: {
+    ...commonResolvers.Mutation,
     ...userResolvers.Mutation,
     ...postResolvers.Mutation,
     ...todoResolvers.Mutation,

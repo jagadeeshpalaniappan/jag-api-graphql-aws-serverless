@@ -6,6 +6,16 @@ async function getPosts() {
   return convertKeyToId(posts);
 }
 
+async function getLimitedPosts({ limit, cursor }) {
+  const posts = await db.get({ table: "posts", limit, cursor });
+  const data = convertKeyToId(posts);
+  return { data, cursor: posts["cursor"] };
+}
+
+function getAllPostsCount() {
+  return db.count({ table: "posts" });
+}
+
 async function getPost({ id }) {
   const post = await db.get({ table: "posts", key: id });
   return convertKeyToId([post])[0];
@@ -40,4 +50,6 @@ module.exports = {
   updatePost,
   deletePost,
   getPostsByUserId,
+  getAllPostsCount,
+  getLimitedPosts,
 };

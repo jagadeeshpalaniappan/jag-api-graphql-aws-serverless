@@ -20,8 +20,19 @@ const typeDefs = gql`
     userId: String
   }
 
+  type TodosPage {
+    data: [Todo]
+    meta: PageMetadata
+  }
+
+  input TodosPageQueryOptions {
+    pagination: PaginationOptions
+    # search: SearchOptions # TODO: implement search
+  }
+
   extend type Query {
-    todos: [Todo]
+    # todos: [Todo] # **deprecated** (use with pagination)
+    todos(options: TodosPageQueryOptions): TodosPage
     todo(id: ID!): Todo
   }
   extend type Mutation {

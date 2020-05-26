@@ -6,6 +6,16 @@ async function getTodos() {
   return convertKeyToId(todos);
 }
 
+function getAllTodosCount() {
+  return db.count({ table: "todos" });
+}
+
+async function getLimitedTodos({ limit, cursor }) {
+  const todos = await db.get({ table: "todos", limit, cursor });
+  const data = convertKeyToId(todos);
+  return { data, cursor: todos["cursor"] };
+}
+
 async function getTodo({ id }) {
   const todo = await db.get({ table: "todos", key: id });
   return convertKeyToId([todo])[0];
@@ -40,4 +50,6 @@ module.exports = {
   updateTodo,
   deleteTodo,
   getTodosByUserId,
+  getAllTodosCount,
+  getLimitedTodos,
 };

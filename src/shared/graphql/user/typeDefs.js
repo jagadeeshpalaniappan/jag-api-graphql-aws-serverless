@@ -19,10 +19,22 @@ const typeDefs = gql`
     email: String!
   }
 
+  type UsersPage {
+    data: [User]
+    meta: PageMetadata
+  }
+
+  input UsersPageQueryOptions {
+    pagination: PaginationOptions
+    # search: SearchOptions # TODO: implement search
+  }
+
   extend type Query {
-    users: [User]
+    # users: [User] # **deprecated** (use with pagination)
+    users(options: UsersPageQueryOptions): UsersPage
     user(id: ID!): User
   }
+
   extend type Mutation {
     createUser(input: CreateUserInput!): User
     updateUser(id: ID!, input: UpdateUserInput!): User

@@ -5,8 +5,26 @@ const postDao = require("../post/dao");
 const todoDao = require("../todo/dao");
 const { validateFields } = require("../../utils/common");
 
+/*
 function users(root, args, session) {
   return dao.getUsers();
+}
+*/
+
+async function users(root, args, session) {
+  const { options } = args;
+  const { pagination } = options;
+
+  const { data, cursor } = await dao.getLimitedUsers({
+    limit: pagination.limit,
+    cursor: pagination.cursor,
+  });
+
+  const totalCount = await dao.getAllUsersCount();
+  const meta = { totalCount, cursor };
+
+  // return: UsersPage
+  return { data, meta };
 }
 
 function user(root, args, session) {

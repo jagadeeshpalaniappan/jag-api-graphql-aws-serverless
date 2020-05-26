@@ -6,6 +6,16 @@ async function getUsers() {
   return convertKeyToId(users);
 }
 
+async function getLimitedUsers({ limit, cursor }) {
+  const users = await db.get({ table: "users", limit, cursor });
+  const data = convertKeyToId(users);
+  return { data, cursor: users["cursor"] };
+}
+
+function getAllUsersCount() {
+  return db.count({ table: "users" });
+}
+
 async function getUser({ id }) {
   const user = await db.get({ table: "users", key: id });
   return convertKeyToId([user])[0];
@@ -33,4 +43,6 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getLimitedUsers,
+  getAllUsersCount,
 };

@@ -20,8 +20,19 @@ const typeDefs = gql`
     userId: String!
   }
 
+  type PostsPage {
+    data: [Post]
+    meta: PageMetadata
+  }
+
+  input PostsPageQueryOptions {
+    pagination: PaginationOptions
+    # search: SearchOptions # TODO: implement search
+  }
+
   extend type Query {
-    posts: [Post]
+    # posts: [Post] # **deprecated** (use with pagination)
+    posts(options: PostsPageQueryOptions): PostsPage
     post(id: ID!): Post
   }
   extend type Mutation {

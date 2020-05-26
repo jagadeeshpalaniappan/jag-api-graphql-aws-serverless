@@ -4,8 +4,20 @@ const dao = require("./dao");
 const userDao = require("../user/dao");
 const { validateFields } = require("../../utils/common");
 
-function todos(root, args, session) {
-  return dao.getTodos();
+async function todos(root, args, session) {
+  const { options } = args;
+  const { pagination } = options;
+
+  const { data, cursor } = await dao.getLimitedTodos({
+    limit: pagination.limit,
+    cursor: pagination.cursor,
+  });
+
+  const totalCount = await dao.getAllTodosCount();
+  const meta = { totalCount, cursor };
+
+  // return: TodosPage
+  return { data, meta };
 }
 
 function todo(root, args, session) {
