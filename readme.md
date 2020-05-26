@@ -17,7 +17,7 @@
 - level1: CRUD (User, Post)
 - level2: CRUD (User, Post) (with Realtionship User <--> Post)
 - level3: CRUD (User, Post, Todo) (User <--> Post) (User <--> Todo)
-- **level4:** CRUD (User, Post, Todo) Pagination
+- **level4:** CRUD (User, Post, Todo) Cursor based Pagination
 - level5: CRUD (User, Post, Todo) Authentication (Github & Google)
 
 ## Local Setup
