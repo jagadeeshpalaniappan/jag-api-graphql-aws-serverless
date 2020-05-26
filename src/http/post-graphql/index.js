@@ -4,11 +4,11 @@ const { typeDefs, resolvers } = require("@architect/shared/graphql");
 
 const cors = {
   origin: "*",
-  credentials: true,
+  credentials: false,
 };
 
-const server = new ApolloServer({ typeDefs, resolvers, cors });
-const handler = server.createHandler();
+const server = new ApolloServer({ typeDefs, resolvers });
+const handler = server.createHandler({ cors });
 
 exports.handler = function (event, context, callback) {
   const body = arc.http.helpers.bodyParser(event);
