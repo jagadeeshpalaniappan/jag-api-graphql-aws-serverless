@@ -8,7 +8,7 @@ const userResolvers = require("./user/resolvers");
 const postTypeDefs = require("./post/typeDefs");
 const postResolvers = require("./post/resolvers");
 
-// post:
+// todo:
 const todoTypeDefs = require("./todo/typeDefs");
 const todoResolvers = require("./todo/resolvers");
 
