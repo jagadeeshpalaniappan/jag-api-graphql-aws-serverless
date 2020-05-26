@@ -20,7 +20,7 @@ async function users(root, args, session) {
     cursor: pagination.cursor,
   });
 
-  const totalCount = await dao.getAllUsersCount();
+  const totalCount = await dao.getUsersTotalCount();
   const meta = { totalCount, cursor };
 
   // return: UsersPage

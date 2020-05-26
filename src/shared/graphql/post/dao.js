@@ -1,10 +1,12 @@
 const db = require("@begin/data");
 const { convertKeyToId } = require("../../utils/common");
 
+/*
 async function getPosts() {
   const posts = await db.get({ table: "posts" });
   return convertKeyToId(posts);
 }
+*/
 
 async function getLimitedPosts({ limit, cursor }) {
   const posts = await db.get({ table: "posts", limit, cursor });
@@ -12,7 +14,7 @@ async function getLimitedPosts({ limit, cursor }) {
   return { data, cursor: posts["cursor"] };
 }
 
-function getAllPostsCount() {
+function getPostsTotalCount() {
   return db.count({ table: "posts" });
 }
 
@@ -44,12 +46,11 @@ async function getPostsByUserId({ userId }) {
 }
 
 module.exports = {
-  getPosts,
   getPost,
   createPost,
   updatePost,
   deletePost,
   getPostsByUserId,
-  getAllPostsCount,
   getLimitedPosts,
+  getPostsTotalCount,
 };

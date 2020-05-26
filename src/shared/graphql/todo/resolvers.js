@@ -13,7 +13,7 @@ async function todos(root, args, session) {
     cursor: pagination.cursor,
   });
 
-  const totalCount = await dao.getAllTodosCount();
+  const totalCount = await dao.getTodosTotalCount();
   const meta = { totalCount, cursor };
 
   // return: TodosPage

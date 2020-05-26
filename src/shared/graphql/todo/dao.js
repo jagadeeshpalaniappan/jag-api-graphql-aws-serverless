@@ -1,12 +1,14 @@
 const db = require("@begin/data");
 const { convertKeyToId } = require("../../utils/common");
 
+/*
 async function getTodos() {
   const todos = await db.get({ table: "todos" });
   return convertKeyToId(todos);
 }
+*/
 
-function getAllTodosCount() {
+function getTodosTotalCount() {
   return db.count({ table: "todos" });
 }
 
@@ -44,12 +46,11 @@ async function getTodosByUserId({ userId }) {
 }
 
 module.exports = {
-  getTodos,
   getTodo,
   createTodo,
   updateTodo,
   deleteTodo,
   getTodosByUserId,
-  getAllTodosCount,
   getLimitedTodos,
+  getTodosTotalCount,
 };

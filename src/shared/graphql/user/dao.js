@@ -1,10 +1,12 @@
 const db = require("@begin/data");
 const { convertKeyToId } = require("../../utils/common");
 
+/*
 async function getUsers() {
   const users = await db.get({ table: "users" });
   return convertKeyToId(users);
 }
+*/
 
 async function getLimitedUsers({ limit, cursor }) {
   const users = await db.get({ table: "users", limit, cursor });
@@ -12,7 +14,7 @@ async function getLimitedUsers({ limit, cursor }) {
   return { data, cursor: users["cursor"] };
 }
 
-function getAllUsersCount() {
+function getUsersTotalCount() {
   return db.count({ table: "users" });
 }
 
@@ -38,11 +40,10 @@ function deleteUser({ id }) {
 }
 
 module.exports = {
-  getUsers,
   getUser,
   createUser,
   updateUser,
   deleteUser,
   getLimitedUsers,
-  getAllUsersCount,
+  getUsersTotalCount,
 };

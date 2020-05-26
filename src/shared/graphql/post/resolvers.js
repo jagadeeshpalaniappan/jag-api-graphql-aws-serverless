@@ -13,7 +13,7 @@ async function posts(root, args, session) {
     cursor: pagination.cursor,
   });
 
-  const totalCount = await dao.getAllPostsCount();
+  const totalCount = await dao.getPostsTotalCount();
   const meta = { totalCount, cursor };
 
   // return: PostsPage
