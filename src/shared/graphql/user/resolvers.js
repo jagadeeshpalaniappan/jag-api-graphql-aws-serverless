@@ -2,6 +2,7 @@ const data = require("@begin/data");
 const xss = require("xss");
 const dao = require("./dao");
 const postDao = require("../post/dao");
+const todoDao = require("../todo/dao");
 const { validateFields } = require("../../utils/common");
 
 function users(root, args, session) {
@@ -44,6 +45,11 @@ function posts(root, args, session) {
   return postDao.getPostsByUserId({ userId: user.id });
 }
 
+function todos(root, args, session) {
+  const user = root; // from: root we can parentInfo
+  return todoDao.getTodosByUserId({ userId: user.id });
+}
+
 const resolvers = {
   Query: { users, user },
   Mutation: {
@@ -53,6 +59,7 @@ const resolvers = {
   },
   User: {
     posts,
+    todos,
   },
 };
 

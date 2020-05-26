@@ -6,6 +6,7 @@ const typeDefs = gql`
     name: String
     email: String
     posts: [Post]
+    todos: [Todo]
   }
 
   input CreateUserInput {
